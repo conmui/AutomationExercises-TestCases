@@ -1,7 +1,6 @@
 package org.example;
 import org.openqa.selenium.By;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //        Test Case 2: Login User with correct email and password
 //        1. Launch browser
@@ -14,11 +13,7 @@ public class TestCase2 extends BaseTest {
         String password = "itsalwayssunny";
 
 //        3. Verify that home page is visible successfully
-        String actualUrl = driver.getCurrentUrl();
-        assertEquals("https://automationexercise.com/", actualUrl);
-
-        String actualPageTitle = driver.getTitle();
-        assertEquals("Automation Exercise", actualPageTitle);
+        verifyPage("https://automationexercise.com/", "Automation Exercise");
 
 //        4. Click on 'Signup / Login' button
         clickButton(By.linkText("Signup / Login"));

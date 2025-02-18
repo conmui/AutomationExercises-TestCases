@@ -1,8 +1,6 @@
 package org.example;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,11 +28,7 @@ public class TestCase1 extends BaseTest {
         String mobileNumber = "2136265731";
 
 //        3. Verify that home page is visible successfully
-        String actualUrl = driver.getCurrentUrl();
-        assertEquals("https://automationexercise.com/", actualUrl);
-
-        String actualPageTitle = driver.getTitle();
-        assertEquals("Automation Exercise", actualPageTitle);
+        verifyPage("https://automationexercise.com/", "Automation Exercise");
 
 //        4. Click on 'Signup / Login' button
         clickButton(By.linkText("Signup / Login"));

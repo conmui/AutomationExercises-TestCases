@@ -29,6 +29,14 @@ public class BaseTest {
         driver.quit();
     }
 
+    public void verifyPage(String expectedUrl, String expectedTitle) {
+        String actualUrl = driver.getCurrentUrl();
+        assertEquals(expectedUrl, actualUrl);
+
+        String actualTitle = driver.getTitle();
+        assertEquals(expectedTitle, actualTitle);
+    }
+
     public void clickButton(By locator) {
         WebElement button = driver.findElement(locator);
         button.click();

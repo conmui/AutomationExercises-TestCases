@@ -17,11 +17,7 @@ public class TestCase3 extends BaseTest {
         String passwordIncorrect = "itsalwaysSunny";
 
 //        3. Verify that home page is visible successfully
-        String actualUrl = driver.getCurrentUrl();
-        assertEquals("https://automationexercise.com/", actualUrl);
-
-        String actualPageTitle = driver.getTitle();
-        assertEquals("Automation Exercise", actualPageTitle);
+        verifyPage("https://automationexercise.com/", "Automation Exercise");
 
 //        4. Click on 'Signup / Login' button
         clickButton(By.linkText("Signup / Login"));
