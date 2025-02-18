@@ -1,30 +1,17 @@
 package org.example;
-import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-public class TestCase1 {
-    WebDriver driver;
-
-    @BeforeEach
-    public void setup() {
-        driver = new ChromeDriver();
-    }
 
 //        Test Case 1: Register User
+//        1. Launch browser
+//        2. Navigate to url 'https://automationexercise.com/'
+public class TestCase1 extends BaseTest {
     @Test
     public void registerUserTest() {
-        String baseURL = "https://automationexercise.com/";
         String username = "dayman";
         String email = "charliekelly@email.com";
         String password = "itsalwayssunny";
@@ -42,14 +29,9 @@ public class TestCase1 {
         String zipCode = "90013";
         String mobileNumber = "2136265731";
 
-//        1. Launch browser
-//        2. Navigate to url 'https://automationexercise.com/'
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get(baseURL);
-
 //        3. Verify that home page is visible successfully
         String actualUrl = driver.getCurrentUrl();
-        assertEquals(baseURL, actualUrl);
+        assertEquals("https://automationexercise.com/", actualUrl);
 
         String actualPageTitle = driver.getTitle();
         assertEquals("Automation Exercise", actualPageTitle);
@@ -121,38 +103,5 @@ public class TestCase1 {
         verifyTextVisible(By.cssSelector("h2[data-qa='account-deleted']"), "ACCOUNT DELETED!");
 
         clickButton(By.cssSelector("a[data-qa='continue-button']"));
-    }
-
-    public void clickButton(By locator) {
-        WebElement button = driver.findElement(locator);
-        button.click();
-    }
-
-    public void verifyTextVisible(By locator, String expectedText) {
-        WebElement header = driver.findElement(locator);
-        assertTrue(header.isDisplayed());
-        assertEquals(expectedText, header.getText());
-    }
-
-    public void fillInput(By locator, String fieldValue) {
-        WebElement input = driver.findElement(locator);
-        input.clear();
-        input.sendKeys(fieldValue);
-    }
-
-    public void selectOption(By locator) {
-        WebElement option = driver.findElement(locator);
-        boolean isChecked = option.isSelected();
-        if (!isChecked) option.click();
-    }
-
-    public void selectDropdown(By locator, String fieldValue) {
-        Select dropdown = new Select(driver.findElement(locator));
-        dropdown.selectByVisibleText(fieldValue);
-    }
-
-    @AfterEach
-    public void teardown() {
-        driver.quit();
     }
 }
