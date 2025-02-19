@@ -1,16 +1,12 @@
 package org.example;
-
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-
-import java.time.Duration;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -43,9 +39,9 @@ public class BaseTest {
     }
 
     public void verifyTextVisible(By locator, String expectedText) {
-        WebElement header = driver.findElement(locator);
-        assertTrue(header.isDisplayed());
-        assertEquals(expectedText, header.getText());
+        WebElement element = driver.findElement(locator);
+        assertTrue(element.isDisplayed());
+        assertEquals(expectedText, element.getText());
     }
 
     public void fillInput(By locator, String fieldValue) {
