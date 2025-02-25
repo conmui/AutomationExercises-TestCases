@@ -1,4 +1,4 @@
-package org.example;
+package com.conmui.tests;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
