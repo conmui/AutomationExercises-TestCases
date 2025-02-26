@@ -1,8 +1,8 @@
 package com.conmui.tests;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import com.conmui.pages.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //        Test Case 1: Register User
 //        1. Launch browser
@@ -10,8 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestCase1 extends BaseTest {
     @Test
     public void registerUserTest() {
+        HomePage homePage = new HomePage(driver);
         String username = "dayman";
         String email = "charliekelly@email.com";
+        String title = "Mr";
+//        String title = "Mrs";
         String password = "itsalwayssunny";
         String day = "9";
         String month = "February";
@@ -28,74 +31,59 @@ public class TestCase1 extends BaseTest {
         String mobileNumber = "2136265731";
 
 //        3. Verify that home page is visible successfully
-        verifyPage("https://automationexercise.com/", "Automation Exercise");
+        assertEquals("https://automationexercise.com/", homePage.getUrl());
+        assertEquals("Automation Exercise", homePage.getPageTitle());
 
 //        4. Click on 'Signup / Login' button
-        clickButton(By.linkText("Signup / Login"));
+        SignupLoginPage signupLoginPage = homePage.clickSignupLogin();
 
 //        5. Verify 'New User Signup!' is visible
-        verifyTextVisible(By.cssSelector(".signup-form h2"), "New User Signup!");
+        assertTrue(signupLoginPage.isHeaderVisible());
+        assertEquals("New User Signup!", signupLoginPage.getHeaderText());
 
 //        6. Enter name and email address
-        fillInput(By.cssSelector("input[data-qa='signup-name']"), username);
-        fillInput(By.cssSelector("input[data-qa='signup-email']"), email);
+        signupLoginPage.fillSignup(username, email);
 
 //        7. Click 'Signup' button
-        clickButton(By.cssSelector("button[data-qa='signup-button']"));
+        SignupPage signupPage = signupLoginPage.clickSignup();
 
 //        8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
-        verifyTextVisible(By.cssSelector(".login-form h2"), "ENTER ACCOUNT INFORMATION");
+        assertTrue(signupPage.isHeaderVisible());
+        assertEquals("ENTER ACCOUNT INFORMATION", signupPage.getHeaderText());
 
 //        9. Fill details: Title, Name, Email, Password, Date of birth
-        selectOption(By.id("id_gender1"));
-
-        fillInput(By.cssSelector("input[data-qa='name']"), username);
-
-        //check autofill from prev page's signup form
-        WebElement emailInput = driver.findElement(By.cssSelector("input[data-qa='email']"));
-        assertEquals(email, emailInput.getDomProperty("value"));
-
-        fillInput(By.cssSelector("input[data-qa='password']"), password);
-        selectDropdown(By.cssSelector("select[data-qa='days']"), day);
-        selectDropdown(By.cssSelector("select[data-qa='months']"), month);
-        selectDropdown(By.cssSelector("select[data-qa='years']"), year);
+        signupPage.fillAccountInformation(title, username, password, day, month, year);
 
 //        10. Select checkbox 'Sign up for our newsletter!'
-        selectOption(By.id("newsletter"));
+        signupPage.selectSignupNewsletterCheckbox();
 
 //        11. Select checkbox 'Receive special offers from our partners!'
-        selectOption(By.id("optin"));
+        signupPage.selectReceiveOffersCheckbox();
 
 //        12. Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
-        fillInput(By.cssSelector("input[data-qa='first_name']"), firstName);
-        fillInput(By.cssSelector("input[data-qa='last_name']"), lastName);
-        fillInput(By.cssSelector("input[data-qa='company']"), company);
-        fillInput(By.cssSelector("input[data-qa='address']"), address);
-        fillInput(By.cssSelector("input[data-qa='address2']"), address2);
-        selectDropdown(By.cssSelector("select[data-qa='country']"), country);
-        fillInput(By.cssSelector("input[data-qa='state']"), state);
-        fillInput(By.cssSelector("input[data-qa='city']"), city);
-        fillInput(By.cssSelector("input[data-qa='zipcode']"), zipCode);
-        fillInput(By.cssSelector("input[data-qa='mobile_number']"), mobileNumber);
+        signupPage.fillAddressInformation(firstName, lastName, company, address, address2, country, state, city, zipCode, mobileNumber);
 
 //        13. Click 'Create Account button'
-        clickButton(By.cssSelector("button[data-qa='create-account']"));
+        AccountCreatedPage accountCreatedPage = signupPage.clickCreateAccount();
 
 //        14. Verify that 'ACCOUNT CREATED!' is visible
-        verifyTextVisible(By.cssSelector("h2[data-qa='account-created']"), "ACCOUNT CREATED!");
+        assertTrue(accountCreatedPage.isHeaderVisible());
+        assertEquals("ACCOUNT CREATED!", accountCreatedPage.getHeaderText());
 
 //        15. Click 'Continue' button
-        clickButton(By.cssSelector("a[data-qa='continue-button']"));
+        homePage = accountCreatedPage.clickContinue();
 
 //        16. Verify that 'Logged in as username' is visible
-        verifyTextVisible(By.cssSelector(".navbar-nav li:last-child"), "Logged in as " + username);
+        assertTrue(homePage.isLoggedInVisible());
+        assertEquals("Logged in as " + username, homePage.getLoggedInText());
 
 //        17. Click 'Delete Account' button
-        clickButton(By.linkText("Delete Account"));
+        AccountDeletedPage accountDeletedPage = homePage.clickDeleteAccount();
 
 //        18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-        verifyTextVisible(By.cssSelector("h2[data-qa='account-deleted']"), "ACCOUNT DELETED!");
+        assertTrue(accountDeletedPage.isHeaderVisible());
+        assertEquals("ACCOUNT DELETED!", accountDeletedPage.getHeaderText());
 
-        clickButton(By.cssSelector("a[data-qa='continue-button']"));
+        accountDeletedPage.clickContinue();
     }
 }
