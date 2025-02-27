@@ -1,6 +1,9 @@
 package com.conmui.tests;
+import com.conmui.pages.HomePage;
+import com.conmui.pages.SignupLoginPage;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //        Test Case 5: Register User with existing email
 //        1. Launch browser
@@ -8,26 +11,29 @@ import org.openqa.selenium.By;
 public class TestCase5 extends BaseTest {
     @Test
     public void registerExistingTest() {
+        HomePage homePage = new HomePage(driver);
         String username = "dayman";
         String email = "charliekelly@email.com";
 
 //        3. Verify that home page is visible successfully
-        verifyPage("https://automationexercise.com/", "Automation Exercise");
+        assertEquals("https://automationexercise.com/", homePage.getUrl());
+        assertEquals("Automation Exercise", homePage.getPageTitle());
 
 //        4. Click on 'Signup / Login' button
-        clickButton(By.linkText("Signup / Login"));
+        SignupLoginPage signupLoginPage = homePage.clickSignupLogin();
 
 //        5. Verify 'New User Signup!' is visible
-        verifyTextVisible(By.cssSelector(".signup-form h2"), "New User Signup!");
+        assertTrue(signupLoginPage.isSignupHeaderVisible());
+        assertEquals("New User Signup!", signupLoginPage.getSignupHeaderText());
 
 //        6. Enter name and already registered email address
-        fillInput(By.cssSelector("input[data-qa='signup-name']"), username);
-        fillInput(By.cssSelector("input[data-qa='signup-email']"), email);
+        signupLoginPage.fillSignup(username, email);
 
 //        7. Click 'Signup' button
-        clickButton(By.cssSelector("button[data-qa='signup-button']"));
+        signupLoginPage.clickSignup();
 
 //        8. Verify error 'Email Address already exist!' is visible
-        verifyTextVisible(By.cssSelector(".signup-form p"), "Email Address already exist!");
+        assertTrue(signupLoginPage.isSignupErrorMessageVisible());
+        assertEquals("Email Address already exist!", signupLoginPage.getSignupErrorMessageText());
     }
 }

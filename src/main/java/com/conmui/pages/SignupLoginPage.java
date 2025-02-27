@@ -7,11 +7,12 @@ public class SignupLoginPage extends BasePage {
     private final By signupUsernameInput = By.cssSelector("input[data-qa='signup-name']");
     private final By signupEmailInput = By.cssSelector("input[data-qa='signup-email']");
     private final By signupButton = By.cssSelector("button[data-qa='signup-button']");
+    private final By signupErrorMessage = By.cssSelector(".signup-form p");
     private final By loginHeader = By.cssSelector(".login-form h2");
     private final By loginEmailInput = By.cssSelector("input[data-qa='login-email']");
     private final By loginPasswordInput = By.cssSelector("input[data-qa='login-password']");
     private final By loginButton = By.cssSelector("button[data-qa='login-button']");
-    private final By errorMessage = By.cssSelector(".login-form p");
+    private final By loginErrorMessage = By.cssSelector(".login-form p");
 
     public SignupLoginPage(WebDriver driver) {
         super(driver);
@@ -36,6 +37,14 @@ public class SignupLoginPage extends BasePage {
         return new SignupPage(driver);
     }
 
+    public boolean isSignupErrorMessageVisible() {
+        return isElementVisible(signupErrorMessage);
+    }
+
+    public String getSignupErrorMessageText() {
+        return getElementText(signupErrorMessage);
+    }
+
     //Log In
     public boolean isLoginHeaderVisible() {
         return isElementVisible(loginHeader);
@@ -55,12 +64,11 @@ public class SignupLoginPage extends BasePage {
         return new HomePage(driver);
     }
 
-    //Errors
-    public boolean isErrorMessageVisible() {
-        return isElementVisible(errorMessage);
+    public boolean isLoginErrorMessageVisible() {
+        return isElementVisible(loginErrorMessage);
     }
 
-    public String getErrorMessageText() {
-        return getElementText(errorMessage);
+    public String getLoginErrorMessageText() {
+        return getElementText(loginErrorMessage);
     }
 }

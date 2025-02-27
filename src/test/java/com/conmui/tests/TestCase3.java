@@ -37,7 +37,7 @@ public class TestCase3 extends BaseTest {
         signupLoginPage.clickLogin();
 
 //        8. Verify error 'Your email or password is incorrect!' is visible
-        assertTrue(signupLoginPage.isErrorMessageVisible());
-        assertEquals("Your email or password is incorrect!", signupLoginPage.getErrorMessageText());
+        assertTrue(signupLoginPage.isLoginErrorMessageVisible());
+        assertEquals("Your email or password is incorrect!", signupLoginPage.getLoginErrorMessageText());
     }
 }
