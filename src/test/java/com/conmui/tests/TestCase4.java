@@ -1,6 +1,9 @@
 package com.conmui.tests;
-import org.openqa.selenium.By;
+import com.conmui.pages.HomePage;
+import com.conmui.pages.SignupLoginPage;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //        Test Case 4: Logout User
 //        1. Launch browser
@@ -8,33 +11,37 @@ import org.junit.jupiter.api.Test;
 public class TestCase4 extends BaseTest {
     @Test
     public void logoutTest() {
+        HomePage homePage = new HomePage(driver);
         String username = "dayman";
         String email = "charliekelly@email.com";
         String password = "itsalwayssunny";
 
 //        3. Verify that home page is visible successfully
-        verifyPage("https://automationexercise.com/", "Automation Exercise");
+        assertEquals("https://automationexercise.com/", homePage.getUrl());
+        assertEquals("Automation Exercise", homePage.getPageTitle());
 
 //        4. Click on 'Signup / Login' button
-        clickButton(By.linkText("Signup / Login"));
+        SignupLoginPage signupLoginPage = homePage.clickSignupLogin();
 
 //        5. Verify 'Login to your account' is visible
-        verifyTextVisible(By.cssSelector(".login-form h2"), "Login to your account");
+        assertTrue(signupLoginPage.isLoginHeaderVisible());
+        assertEquals("Login to your account", signupLoginPage.getLoginHeaderText());
 
 //        6. Enter correct email address and password
-        fillInput(By.cssSelector("input[data-qa='login-email']"), email);
-        fillInput(By.cssSelector("input[data-qa='login-password']"), password);
+        signupLoginPage.fillLogin(email, password);
 
 //        7. Click 'login' button
-        clickButton(By.cssSelector("button[data-qa='login-button']"));
+        homePage = signupLoginPage.clickLogin();
 
 //        8. Verify that 'Logged in as username' is visible
-        verifyTextVisible(By.cssSelector(".navbar-nav li:last-child"), "Logged in as " + username);
+        assertTrue(homePage.isLoggedInVisible());
+        assertEquals("Logged in as " + username, homePage.getLoggedInText());
 
 //        9. Click 'Logout' button
-        clickButton(By.linkText("Logout"));
+        signupLoginPage = homePage.clickLogout();
 
 //        10. Verify that user is navigated to login page
-        verifyPage("https://automationexercise.com/login", "Automation Exercise - Signup / Login");
+        assertEquals("https://automationexercise.com/login", signupLoginPage.getUrl());
+        assertEquals("Automation Exercise - Signup / Login", signupLoginPage.getPageTitle());
     }
 }

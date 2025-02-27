@@ -6,6 +6,7 @@ public class HomePage extends BasePage {
     private final By signupLoginButton = By.linkText("Signup / Login");
     private final By loggedInAs = By.cssSelector(".navbar-nav li:last-child");
     private final By deleteAccount = By.linkText("Delete Account");
+    private final By logoutButton = By.linkText("Logout");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -27,5 +28,10 @@ public class HomePage extends BasePage {
     public AccountDeletedPage clickDeleteAccount() {
         clickButton(deleteAccount);
         return new AccountDeletedPage(driver);
+    }
+
+    public SignupLoginPage clickLogout() {
+        clickButton(logoutButton);
+        return new SignupLoginPage(driver);
     }
 }
