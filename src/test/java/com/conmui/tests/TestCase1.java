@@ -38,8 +38,8 @@ public class TestCase1 extends BaseTest {
         SignupLoginPage signupLoginPage = homePage.clickSignupLogin();
 
 //        5. Verify 'New User Signup!' is visible
-        assertTrue(signupLoginPage.isHeaderVisible());
-        assertEquals("New User Signup!", signupLoginPage.getHeaderText());
+        assertTrue(signupLoginPage.isSignupHeaderVisible());
+        assertEquals("New User Signup!", signupLoginPage.getSignupHeaderText());
 
 //        6. Enter name and email address
         signupLoginPage.fillSignup(username, email);
