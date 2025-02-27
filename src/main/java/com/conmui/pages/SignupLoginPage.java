@@ -11,11 +11,13 @@ public class SignupLoginPage extends BasePage {
     private final By loginEmailInput = By.cssSelector("input[data-qa='login-email']");
     private final By loginPasswordInput = By.cssSelector("input[data-qa='login-password']");
     private final By loginButton = By.cssSelector("button[data-qa='login-button']");
+    private final By errorMessage = By.cssSelector(".login-form p");
 
     public SignupLoginPage(WebDriver driver) {
         super(driver);
     }
 
+    //Sign up
     public boolean isSignupHeaderVisible() {
         return isElementVisible(signupHeader);
     }
@@ -29,16 +31,12 @@ public class SignupLoginPage extends BasePage {
         fillInput(signupEmailInput, email);
     }
 
-    public void fillLogin(String email, String password) {
-        fillInput(loginEmailInput, email);
-        fillInput(loginPasswordInput, password);
-    }
-
     public SignupPage clickSignup() {
         clickButton(signupButton);
         return new SignupPage(driver);
     }
 
+    //Log In
     public boolean isLoginHeaderVisible() {
         return isElementVisible(loginHeader);
     }
@@ -47,8 +45,22 @@ public class SignupLoginPage extends BasePage {
         return getElementText(loginHeader);
     }
 
+    public void fillLogin(String email, String password) {
+        fillInput(loginEmailInput, email);
+        fillInput(loginPasswordInput, password);
+    }
+
     public HomePage clickLogin() {
         clickButton(loginButton);
         return new HomePage(driver);
+    }
+
+    //Errors
+    public boolean isErrorMessageVisible() {
+        return isElementVisible(errorMessage);
+    }
+
+    public String getErrorMessageText() {
+        return getElementText(errorMessage);
     }
 }
