@@ -34,4 +34,9 @@ public class HomePage extends BasePage {
         clickButton(logoutButton);
         return new SignupLoginPage(driver);
     }
+
+    public ContactUsPage clickContactUs() {
+        clickButton(By.linkText("Contact us"));
+        return new ContactUsPage(driver);
+    }
 }

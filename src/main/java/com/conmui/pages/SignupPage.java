@@ -3,18 +3,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SignupPage extends BasePage {
-    private final By enterAccHeader = By.cssSelector(".login-form h2");
+    private final By header = By.cssSelector(".login-form h2");
 
     public SignupPage(WebDriver driver) {
         super(driver);
     }
 
     public boolean isHeaderVisible() {
-        return isElementVisible(enterAccHeader);
+        return isElementVisible(header);
     }
 
     public String getHeaderText() {
-        return getElementText(enterAccHeader);
+        return getElementText(header);
     }
 
     public void fillAccountInformation(String title, String username, String password, String day, String month, String year) {
