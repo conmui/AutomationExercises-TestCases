@@ -39,4 +39,9 @@ public class HomePage extends BasePage {
         clickButton(By.linkText("Contact us"));
         return new ContactUsPage(driver);
     }
+
+    public TestCasesPage navigateToTestCasesPage() {
+        clickButton(By.linkText("Test Cases"));
+        return new TestCasesPage(driver);
+    }
 }
