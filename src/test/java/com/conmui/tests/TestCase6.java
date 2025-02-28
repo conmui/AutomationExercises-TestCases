@@ -2,7 +2,6 @@ package com.conmui.tests;
 import com.conmui.pages.ContactUsPage;
 import com.conmui.pages.HomePage;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -25,7 +24,7 @@ public class TestCase6 extends BaseTest {
         assertEquals("Automation Exercise", homePage.getPageTitle());
 
 //        4. Click on 'Contact Us' button
-        ContactUsPage contactUsPage = homePage.clickContactUs();
+        ContactUsPage contactUsPage = homePage.navigateToContactUsPage();
 
 //        5. Verify 'GET IN TOUCH' is visible
         assertTrue(contactUsPage.isHeaderVisible());

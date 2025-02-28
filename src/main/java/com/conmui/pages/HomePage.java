@@ -12,7 +12,7 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public SignupLoginPage clickSignupLogin() {
+    public SignupLoginPage navigateToSignupLoginPage() {
         clickButton(signupLoginButton);
         return new SignupLoginPage(driver);
     }
@@ -35,7 +35,7 @@ public class HomePage extends BasePage {
         return new SignupLoginPage(driver);
     }
 
-    public ContactUsPage clickContactUs() {
+    public ContactUsPage navigateToContactUsPage() {
         clickButton(By.linkText("Contact us"));
         return new ContactUsPage(driver);
     }
@@ -43,5 +43,10 @@ public class HomePage extends BasePage {
     public TestCasesPage navigateToTestCasesPage() {
         clickButton(By.linkText("Test Cases"));
         return new TestCasesPage(driver);
+    }
+
+    public ProductsPage navigateToProductsPage() {
+        clickButton(By.partialLinkText("Products"));
+        return new ProductsPage(driver);
     }
 }

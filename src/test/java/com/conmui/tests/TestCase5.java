@@ -20,7 +20,7 @@ public class TestCase5 extends BaseTest {
         assertEquals("Automation Exercise", homePage.getPageTitle());
 
 //        4. Click on 'Signup / Login' button
-        SignupLoginPage signupLoginPage = homePage.clickSignupLogin();
+        SignupLoginPage signupLoginPage = homePage.navigateToSignupLoginPage();
 
 //        5. Verify 'New User Signup!' is visible
         assertTrue(signupLoginPage.isSignupHeaderVisible());
