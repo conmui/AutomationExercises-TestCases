@@ -1,9 +1,11 @@
 package com.conmui.tests;
+import com.conmui.pages.HomePage;
+import com.conmui.pages.ProductsPage;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //        Test Case 9: Search Product
@@ -12,35 +14,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestCase9 extends BaseTest {
     @Test
     public void searchProductTest() {
+        HomePage homePage = new HomePage(driver);
         String searchText = "jeans";
 
 //        3. Verify that home page is visible successfully
-        verifyPage("https://automationexercise.com/", "Automation Exercise");
+        assertEquals("https://automationexercise.com/", homePage.getUrl());
+        assertEquals("Automation Exercise", homePage.getPageTitle());
 
 //        4. Click on 'Products' button
-        clickButton(By.partialLinkText("Products"));
+        ProductsPage productsPage = homePage.navigateToProductsPage();
 
 //        5. Verify user is navigated to ALL PRODUCTS page successfully
-        verifyPage("https://automationexercise.com/products", "Automation Exercise - All Products");
+        assertEquals("https://automationexercise.com/products", productsPage.getUrl());
+        assertEquals("Automation Exercise - All Products", productsPage.getPageTitle());
 
 //        6. Enter product name in search input and click search button
-        WebElement searchInput = driver.findElement(By.id("search_product"));
-        searchInput.sendKeys(searchText);
-
-        clickButton(By.id("submit_search"));
+        productsPage.searchForProducts(searchText);
 
 //        7. Verify 'SEARCHED PRODUCTS' is visible
-        verifyTextVisible(By.cssSelector(".features_items > .title"), "SEARCHED PRODUCTS");
+        assertTrue(productsPage.isHeaderVisible());
+        assertEquals("SEARCHED PRODUCTS", productsPage.getHeaderText());
 
 //        8. Verify all the products related to search are visible
         List<WebElement> searchResults = driver.findElements(By.cssSelector(".productinfo > p"));
         for (WebElement product : searchResults) {
-            verifyProductDetails(product, searchText);
+            assertTrue(productsPage.verifySearchResult(product, searchText));
         }
-    }
-
-    public void verifyProductDetails(WebElement element, String expectedText) {
-        assertTrue(element.isDisplayed());
-        assertTrue(element.getText().toLowerCase().contains(expectedText));
     }
 }

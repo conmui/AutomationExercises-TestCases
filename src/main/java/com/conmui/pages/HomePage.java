@@ -12,9 +12,34 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    public ProductsPage navigateToProductsPage() {
+        clickButton(By.partialLinkText("Products"));
+        return new ProductsPage(driver);
+    }
+
     public SignupLoginPage navigateToSignupLoginPage() {
         clickButton(signupLoginButton);
         return new SignupLoginPage(driver);
+    }
+
+    public SignupLoginPage clickLogout() {
+        clickButton(logoutButton);
+        return new SignupLoginPage(driver);
+    }
+
+    public AccountDeletedPage clickDeleteAccount() {
+        clickButton(deleteAccount);
+        return new AccountDeletedPage(driver);
+    }
+
+    public TestCasesPage navigateToTestCasesPage() {
+        clickButton(By.linkText("Test Cases"));
+        return new TestCasesPage(driver);
+    }
+
+    public ContactUsPage navigateToContactUsPage() {
+        clickButton(By.linkText("Contact us"));
+        return new ContactUsPage(driver);
     }
 
     public boolean isLoggedInVisible() {
@@ -23,30 +48,5 @@ public class HomePage extends BasePage {
 
     public String getLoggedInText() {
         return getElementText(loggedInAs);
-    }
-
-    public AccountDeletedPage clickDeleteAccount() {
-        clickButton(deleteAccount);
-        return new AccountDeletedPage(driver);
-    }
-
-    public SignupLoginPage clickLogout() {
-        clickButton(logoutButton);
-        return new SignupLoginPage(driver);
-    }
-
-    public ContactUsPage navigateToContactUsPage() {
-        clickButton(By.linkText("Contact us"));
-        return new ContactUsPage(driver);
-    }
-
-    public TestCasesPage navigateToTestCasesPage() {
-        clickButton(By.linkText("Test Cases"));
-        return new TestCasesPage(driver);
-    }
-
-    public ProductsPage navigateToProductsPage() {
-        clickButton(By.partialLinkText("Products"));
-        return new ProductsPage(driver);
     }
 }
