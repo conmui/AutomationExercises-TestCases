@@ -2,10 +2,13 @@ package com.conmui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 public class BasePage {
     protected WebDriver driver;
+    private final By footerHeader = By.cssSelector(".footer-widget h2");
+    private final By successAlert = By.id("success-subscribe");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -55,5 +58,31 @@ public class BasePage {
     public void selectDropdown(By locator, String fieldValue) {
         Select dropdown = new Select(driver.findElement(locator));
         dropdown.selectByVisibleText(fieldValue);
+    }
+
+    public void scrollToFooter() {
+        WebElement footer = driver.findElement(By.tagName("footer"));
+        new Actions(driver).scrollToElement(footer).perform();
+    }
+
+    public boolean isFooterHeaderVisible() {
+        return isElementVisible(footerHeader);
+    }
+
+    public String getFooterHeaderText() {
+        return getElementText(footerHeader);
+    }
+
+    public void subscribe(String email) {
+        fillInput(By.id("susbscribe_email"), email);
+        clickButton(By.id("subscribe"));
+    }
+
+    public boolean isSubscribedAlertVisible() {
+        return isElementVisible(successAlert);
+    }
+
+    public String getSubscribedAlertText() {
+        return getElementText(successAlert);
     }
 }

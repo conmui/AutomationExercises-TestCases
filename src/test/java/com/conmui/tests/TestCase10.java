@@ -18,7 +18,7 @@ public class TestCase10 extends BaseTest {
         assertEquals("Automation Exercise", homePage.getPageTitle());
 
 //        4. Scroll down to footer
-        homePage.scrollToBottom();
+        homePage.scrollToFooter();
 
 //        5. Verify text 'SUBSCRIPTION'
         assertTrue(homePage.isFooterHeaderVisible());
@@ -28,7 +28,7 @@ public class TestCase10 extends BaseTest {
         homePage.subscribe(email);
 
 //        7. Verify success message 'You have been successfully subscribed!' is visible
-        assertTrue(homePage.isSuccessAlertVisible());
-        assertEquals("You have been successfully subscribed!", homePage.getSuccessAlertText());
+        assertTrue(homePage.isSubscribedAlertVisible());
+        assertEquals("You have been successfully subscribed!", homePage.getSubscribedAlertText());
     }
 }
