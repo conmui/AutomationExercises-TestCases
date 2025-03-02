@@ -3,7 +3,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class BasePage {
     protected WebDriver driver;
@@ -60,6 +64,7 @@ public class BasePage {
         dropdown.selectByVisibleText(fieldValue);
     }
 
+    //Footer
     public void scrollToFooter() {
         WebElement footer = driver.findElement(By.tagName("footer"));
         new Actions(driver).scrollToElement(footer).perform();
@@ -84,5 +89,18 @@ public class BasePage {
 
     public String getSubscribedAlertText() {
         return getElementText(successAlert);
+    }
+
+    public void clickModalButton(By locator) {
+        WebElement button = driver.findElement(locator);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(button));
+        clickButton(locator);
+    }
+
+    public int extractNumValue(By locator) {
+        String text = driver.findElement(locator).getText();
+        return Integer.parseInt(text.replaceAll("\\D+", ""));
     }
 }

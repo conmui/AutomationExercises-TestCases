@@ -1,6 +1,10 @@
 package com.conmui.tests;
-import org.openqa.selenium.By;
+import com.conmui.Product;
+import com.conmui.pages.CartPage;
+import com.conmui.pages.HomePage;
+import com.conmui.pages.ProductsPage;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //        Test Case 12: Add Products in Cart
 //        1. Launch browser
@@ -8,28 +12,41 @@ import org.junit.jupiter.api.Test;
 public class TestCase12 extends BaseTest {
     @Test
     public void addProductsCartTest() {
+        HomePage homePage = new HomePage(driver);
+        Product product1 = new Product(1, "Blue Top", 500, 1);
+        Product product2 = new Product(2, "Men Tshirt", 400, 1);
+
 //        3. Verify that home page is visible successfully
-        verifyPage("https://automationexercise.com/", "Automation Exercise");
+        assertEquals("https://automationexercise.com/", homePage.getUrl());
+        assertEquals("Automation Exercise", homePage.getPageTitle());
 
 //        4. Click 'Products' button
-        clickButton(By.partialLinkText("Products"));
+        ProductsPage productsPage = homePage.navigateToProductsPage();
 
 //        5. Hover over first product and click 'Add to cart'
-        addProductToCart(1);
+        productsPage.addProductToCart(product1.getId());
 
 //        6. Click 'Continue Shopping' button
-        clickModalButton(By.cssSelector(".modal-content button"));
+        productsPage.clickContinueShopping();
 
 //        7. Hover over second product and click 'Add to cart'
-        addProductToCart(2);
+        productsPage.addProductToCart(product2.getId());
 
 //        8. Click 'View Cart' button
-        clickModalButton(By.linkText("View Cart"));
+        CartPage cartPage = productsPage.clickViewCart();
 
 //        9. Verify both products are added to Cart
+        assertEquals(2, cartPage.getNumProductsInCart());
+
 //        10. Verify their prices, quantity and total price
-        getNumProductsInCart(2);
-        verifyProductDetails(1, "Blue Top", 500, 1, 500);
-        verifyProductDetails(2, "Men Tshirt", 400, 1, 400);
+        verifyProductDetails(cartPage, product1);
+        verifyProductDetails(cartPage, product2);
+    }
+
+    public void verifyProductDetails(CartPage cartPage, Product product) {
+        assertEquals(product.getName(), cartPage.getProductName(product.getId()));
+        assertEquals(product.getPrice(), cartPage.getProductPrice(product.getId()));
+        assertEquals(product.getQuantity(), cartPage.getProductQuantity(product.getId()));
+        assertEquals(product.getTotal(), cartPage.getProductTotal(product.getId()));
     }
 }
