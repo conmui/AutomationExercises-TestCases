@@ -55,4 +55,9 @@ public class HomePage extends BasePage {
     public String getLoggedInText() {
         return getElementText(loggedInAs);
     }
+
+    public ProductDetailsPage viewProduct(int productId) {
+        clickButton(By.cssSelector("a[href='/product_details/" + productId + "']"));
+        return new ProductDetailsPage(driver);
+    }
 }

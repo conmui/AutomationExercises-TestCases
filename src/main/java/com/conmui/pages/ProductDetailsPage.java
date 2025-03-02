@@ -3,6 +3,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ProductDetailsPage extends BasePage {
+    private final By quantityInput = By.id("quantity");
+    private final By addToCart = By.cssSelector(".product-information button");
+    private final By viewCart = By.linkText("View Cart");
+
     public ProductDetailsPage(WebDriver driver) {
         super(driver);
     }
@@ -29,5 +33,18 @@ public class ProductDetailsPage extends BasePage {
 
     public boolean isProductBrandVisible() {
         return isElementVisible(By.cssSelector(".product-information > p:nth-of-type(4)"));
+    }
+
+    public void increaseQuantity(int increaseTo) {
+        fillInput(quantityInput, String.valueOf(increaseTo));
+    }
+
+    public void clickAddToCart() {
+        clickButton(addToCart);
+    }
+
+    public CartPage clickViewCart() {
+        clickModalButton(viewCart);
+        return new CartPage(driver);
     }
 }
