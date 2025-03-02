@@ -1,4 +1,6 @@
 package com.conmui.tests;
+
+import com.conmui.User;
 import com.conmui.pages.HomePage;
 import com.conmui.pages.SignupLoginPage;
 import org.junit.jupiter.api.Test;
@@ -12,8 +14,7 @@ public class TestCase5 extends BaseTest {
     @Test
     public void registerExistingTest() {
         HomePage homePage = new HomePage(driver);
-        String username = "dayman";
-        String email = "charliekelly@email.com";
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
 
 //        3. Verify that home page is visible successfully
         assertEquals("https://automationexercise.com/", homePage.getUrl());
@@ -27,7 +28,7 @@ public class TestCase5 extends BaseTest {
         assertEquals("New User Signup!", signupLoginPage.getSignupHeaderText());
 
 //        6. Enter name and already registered email address
-        signupLoginPage.fillSignup(username, email);
+        signupLoginPage.fillSignup(user.getUsername(), user.getEmail());
 
 //        7. Click 'Signup' button
         signupLoginPage.clickSignup();

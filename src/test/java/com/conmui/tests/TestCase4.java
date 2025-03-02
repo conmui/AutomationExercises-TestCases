@@ -1,4 +1,6 @@
 package com.conmui.tests;
+
+import com.conmui.User;
 import com.conmui.pages.HomePage;
 import com.conmui.pages.SignupLoginPage;
 import org.junit.jupiter.api.Test;
@@ -12,9 +14,7 @@ public class TestCase4 extends BaseTest {
     @Test
     public void logoutTest() {
         HomePage homePage = new HomePage(driver);
-        String username = "dayman";
-        String email = "charliekelly@email.com";
-        String password = "itsalwayssunny";
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
 
 //        3. Verify that home page is visible successfully
         assertEquals("https://automationexercise.com/", homePage.getUrl());
@@ -28,14 +28,14 @@ public class TestCase4 extends BaseTest {
         assertEquals("Login to your account", signupLoginPage.getLoginHeaderText());
 
 //        6. Enter correct email address and password
-        signupLoginPage.fillLogin(email, password);
+        signupLoginPage.fillLogin(user.getEmail(), user.getPassword());
 
 //        7. Click 'login' button
         homePage = signupLoginPage.clickLogin();
 
 //        8. Verify that 'Logged in as username' is visible
         assertTrue(homePage.isLoggedInVisible());
-        assertEquals("Logged in as " + username, homePage.getLoggedInText());
+        assertEquals("Logged in as " + user.getUsername(), homePage.getLoggedInText());
 
 //        9. Click 'Logout' button
         signupLoginPage = homePage.clickLogout();

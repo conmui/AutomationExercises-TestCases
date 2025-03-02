@@ -1,8 +1,8 @@
 package com.conmui.tests;
+
 import com.conmui.pages.HomePage;
 import com.conmui.pages.TestCasesPage;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //        Test Case 7: Verify Test Cases Page

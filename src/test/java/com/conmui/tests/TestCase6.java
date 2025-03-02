@@ -1,4 +1,6 @@
 package com.conmui.tests;
+
+import com.conmui.User;
 import com.conmui.pages.ContactUsPage;
 import com.conmui.pages.HomePage;
 import org.junit.jupiter.api.Test;
@@ -12,9 +14,7 @@ public class TestCase6 extends BaseTest {
     @Test
     public void contactUsTest() {
         HomePage homePage = new HomePage(driver);
-        String firstName = "Charlie";
-        String lastName = "Kelly";
-        String email = "charliekelly@email.com";
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
         String subject = "Lorem Ipsum";
         String message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 //        String uploadFilePath = "";
@@ -31,7 +31,7 @@ public class TestCase6 extends BaseTest {
         assertEquals("GET IN TOUCH", contactUsPage.getHeaderText());
 
 //        6. Enter name, email, subject and message
-        contactUsPage.fillContactMessage(firstName + " " + lastName, email, subject, message);
+        contactUsPage.fillContactMessage(user.getFirstName() + " " + user.getLastName(), user.getEmail(), subject, message);
 
 //        7. Upload file
 //        contactUsPage.uploadFile(uploadFilePath);

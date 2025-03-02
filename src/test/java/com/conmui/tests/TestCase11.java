@@ -1,4 +1,6 @@
 package com.conmui.tests;
+
+import com.conmui.User;
 import com.conmui.pages.CartPage;
 import com.conmui.pages.HomePage;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,7 @@ public class TestCase11 extends BaseTest {
     @Test
     public void subscribeOnCartPageTest() {
         HomePage homePage = new HomePage(driver);
-        String email = "charliekelly@email.com";
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
 
 //        3. Verify that home page is visible successfully
         assertEquals("https://automationexercise.com/", homePage.getUrl());
@@ -29,7 +31,7 @@ public class TestCase11 extends BaseTest {
         assertEquals("SUBSCRIPTION", cartPage.getFooterHeaderText());
 
 //        7. Enter email address in input and click arrow button
-        cartPage.subscribe(email);
+        cartPage.subscribe(user.getEmail());
 
 //        8. Verify success message 'You have been successfully subscribed!' is visible
         assertTrue(cartPage.isSubscribedAlertVisible());

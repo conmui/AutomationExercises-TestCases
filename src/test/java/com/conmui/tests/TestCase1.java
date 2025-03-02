@@ -1,4 +1,6 @@
 package com.conmui.tests;
+
+import com.conmui.User;
 import com.conmui.pages.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,24 +13,7 @@ public class TestCase1 extends BaseTest {
     @Test
     public void registerUserTest() {
         HomePage homePage = new HomePage(driver);
-        String username = "dayman";
-        String email = "charliekelly@email.com";
-        String title = "Mr";
-//        String title = "Mrs";
-        String password = "itsalwayssunny";
-        String day = "9";
-        String month = "February";
-        String year = "1976";
-        String firstName = "Charlie";
-        String lastName = "Kelly";
-        String company = "Paddy's Pub";
-        String address = "544 Mateo Street";
-        String address2 = "";
-        String country = "United States";
-        String state = "California";
-        String city = "Los Angeles";
-        String zipCode = "90013";
-        String mobileNumber = "2136265731";
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
 
 //        3. Verify that home page is visible successfully
         assertEquals("https://automationexercise.com/", homePage.getUrl());
@@ -42,7 +27,7 @@ public class TestCase1 extends BaseTest {
         assertEquals("New User Signup!", signupLoginPage.getSignupHeaderText());
 
 //        6. Enter name and email address
-        signupLoginPage.fillSignup(username, email);
+        signupLoginPage.fillSignup(user.getUsername(), user.getEmail());
 
 //        7. Click 'Signup' button
         SignupPage signupPage = signupLoginPage.clickSignup();
@@ -52,7 +37,7 @@ public class TestCase1 extends BaseTest {
         assertEquals("ENTER ACCOUNT INFORMATION", signupPage.getHeaderText());
 
 //        9. Fill details: Title, Name, Email, Password, Date of birth
-        signupPage.fillAccountInformation(title, username, password, day, month, year);
+        signupPage.fillAccountInformation(user.getTitle(), user.getUsername(), user.getPassword(), user.getDay(), user.getMonth(), user.getYear());
 
 //        10. Select checkbox 'Sign up for our newsletter!'
         signupPage.selectSignupNewsletterCheckbox();
@@ -61,7 +46,7 @@ public class TestCase1 extends BaseTest {
         signupPage.selectReceiveOffersCheckbox();
 
 //        12. Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
-        signupPage.fillAddressInformation(firstName, lastName, company, address, address2, country, state, city, zipCode, mobileNumber);
+        signupPage.fillAddressInformation(user.getFirstName(), user.getLastName(), user.getCompany(), user.getAddress(), user.getAddress2(), user.getCountry(), user.getState(), user.getCity(), user.getZipCode(), user.getMobileNumber());
 
 //        13. Click 'Create Account button'
         AccountCreatedPage accountCreatedPage = signupPage.clickCreateAccount();
@@ -75,7 +60,7 @@ public class TestCase1 extends BaseTest {
 
 //        16. Verify that 'Logged in as username' is visible
         assertTrue(homePage.isLoggedInVisible());
-        assertEquals("Logged in as " + username, homePage.getLoggedInText());
+        assertEquals("Logged in as " + user.getUsername(), homePage.getLoggedInText());
 
 //        17. Click 'Delete Account' button
         AccountDeletedPage accountDeletedPage = homePage.clickDeleteAccount();
