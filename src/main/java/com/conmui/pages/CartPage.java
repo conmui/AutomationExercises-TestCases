@@ -1,9 +1,13 @@
 package com.conmui.pages;
 
+import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage extends BasePage {
     private final List<WebElement> cartProducts = driver.findElements(By.xpath("//tr[contains(@id, 'product-')]"));
@@ -42,5 +46,21 @@ public class CartPage extends BasePage {
     public SignupLoginPage clickRegisterLogin() {
         clickButton(registerLogin);
         return new SignupLoginPage(driver);
+    }
+
+    public void removeProduct(int productId) {
+        clickButton(By.cssSelector("#product-" + productId + " .cart_quantity_delete"));
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("product-" + productId)));
+    }
+
+    public boolean isProductRemoved(int productId) {
+        try {
+            driver.findElement(By.id("product-" + productId));
+            return false;
+        } catch (NoSuchElementException e) {
+            return true;
+        }
     }
 }
