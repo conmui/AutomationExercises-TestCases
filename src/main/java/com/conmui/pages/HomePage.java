@@ -1,5 +1,6 @@
 package com.conmui.pages;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +14,8 @@ public class HomePage extends BasePage {
     private final By logoutButton = By.linkText("Logout");
     private final By continueShopping = By.cssSelector(".modal-content button");
     private final By viewCart = By.linkText("View Cart");
+    private final By categorySection = By.id("accordian");
+    private final List<WebElement> categoryPanels = driver.findElements(By.cssSelector(".panel"));
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -80,5 +83,19 @@ public class HomePage extends BasePage {
     public CartPage clickViewCart() {
         clickModalButton(viewCart);
         return new CartPage(driver);
+    }
+
+    public boolean isCategorySectionVisible() {
+        return isElementVisible(categorySection);
+    }
+
+    public boolean isCategorySectionFilled() {
+        return !categoryPanels.isEmpty();
+    }
+
+    public CategoryProductsPage clickCategorySubcategory(String category, int subcategoryId) {
+        clickButton(By.cssSelector("a[href='#" + category + "']"));
+        clickButton(By.cssSelector("a[href='/category_products/" + subcategoryId + "']"));
+        return new CategoryProductsPage(driver);
     }
 }
