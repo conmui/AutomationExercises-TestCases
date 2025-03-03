@@ -24,6 +24,8 @@ public class TestCase18 extends BaseTest {
 
 //        3. Verify that categories are visible on left sidebar
         assertTrue(homePage.isCategorySectionVisible());
+        assertTrue(homePage.isCategoryHeaderVisible());
+        assertEquals("CATEGORY", homePage.getCategoryHeaderText());
         assertTrue(homePage.isCategorySectionFilled());
 
 //        4. Click on 'Women' category
