@@ -4,8 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CheckoutPage extends BasePage {
+    private final By deleteAccount = By.linkText("Delete Account");
+
     public CheckoutPage(WebDriver driver) {
         super(driver);
+    }
+
+    public AccountDeletedPage clickDeleteAccount() {
+        clickButton(deleteAccount);
+        return new AccountDeletedPage(driver);
     }
 
     public String getFullName(String addressType) {
