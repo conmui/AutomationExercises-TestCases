@@ -1,5 +1,7 @@
 package com.conmui.tests;
 
+import com.conmui.Product;
+import com.conmui.User;
 import com.conmui.pages.HomePage;
 import com.conmui.pages.ProductDetailsPage;
 import com.conmui.pages.ProductsPage;
@@ -14,6 +16,8 @@ public class TestCase8 extends BaseTest {
     @Test
     public void allProdsProdDetailTest() {
         HomePage homePage = new HomePage(driver);
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
+        Product product1 = new Product(1, "Blue Top", 500, 1);
 
 //        3. Verify that home page is visible successfully
         assertEquals("https://automationexercise.com/", homePage.getUrl());
@@ -31,7 +35,7 @@ public class TestCase8 extends BaseTest {
         assertTrue(productsPage.isProductsListFilled());
 
 //        7. Click on 'View Product' of first product
-        ProductDetailsPage productDetailsPage = productsPage.clickViewProduct();
+        ProductDetailsPage productDetailsPage = productsPage.clickViewProduct(product1.getId());
 
 //        8. User is landed to product detail page
         assertEquals("https://automationexercise.com/product_details/1", productDetailsPage.getUrl());

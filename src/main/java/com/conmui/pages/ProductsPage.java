@@ -41,8 +41,8 @@ public class ProductsPage extends BasePage {
         return !products.isEmpty();
     }
 
-    public ProductDetailsPage clickViewProduct() {
-        clickButton(viewProduct);
+    public ProductDetailsPage clickViewProduct(int productId) {
+        clickButton(By.cssSelector("a[href='/product_details/" + productId + "']"));
         return new ProductDetailsPage(driver);
     }
 
