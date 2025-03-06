@@ -30,7 +30,6 @@ public class TestCase19 extends BaseTest {
         BrandProductsPage brandProductsPage = homePage.clickBrand(brandName1);
 
 //        6. Verify that user is navigated to brand page and brand products are displayed
-
         verifyPageAndProducts(brandProductsPage, brandName1);
 
 //        7. On left sidebar, click on any other brand link

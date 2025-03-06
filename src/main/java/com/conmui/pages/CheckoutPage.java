@@ -4,15 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CheckoutPage extends BasePage {
-    private final By deleteAccount = By.linkText("Delete Account");
+    private final By placeOrder = By.cssSelector("a[href='/payment']");
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
-    }
-
-    public AccountDeletedPage clickDeleteAccount() {
-        clickButton(deleteAccount);
-        return new AccountDeletedPage(driver);
     }
 
     public String getFullName(String addressType) {
@@ -64,7 +59,8 @@ public class CheckoutPage extends BasePage {
     }
 
     public PaymentPage clickPlaceOrder() {
-        clickButton(By.cssSelector("a[href='/payment']"));
+        clickButton(placeOrder);
+
         return new PaymentPage(driver);
     }
 }

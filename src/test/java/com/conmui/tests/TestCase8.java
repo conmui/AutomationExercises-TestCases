@@ -42,6 +42,10 @@ public class TestCase8 extends BaseTest {
         assertEquals("Automation Exercise - Product Details", productDetailsPage.getPageTitle());
 
 //        9. Verify that product details is visible: product name, category, price, availability, condition, brand
+        verifyProductDetailsVisible(productDetailsPage);
+    }
+
+    public void verifyProductDetailsVisible(ProductDetailsPage productDetailsPage) {
         assertTrue(productDetailsPage.isProductNameVisible());
         assertTrue(productDetailsPage.isProductCategoryVisible());
         assertTrue(productDetailsPage.isProductPriceVisible());

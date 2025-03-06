@@ -7,12 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class ProductsPage extends BasePage {
-    private final WebElement searchInput = driver.findElement(By.id("search_product"));
     private final By searchButton = By.id("submit_search");
-    private final By productsList = By.cssSelector(".features_items");
     private final By header = By.cssSelector(".features_items > .title");
-    private final List<WebElement> products = driver.findElements(By.cssSelector(".single-products"));
-    private final By viewProduct = By.linkText("View Product");
+    private final By productsList = By.cssSelector(".features_items");
     private final By continueShopping = By.cssSelector(".modal-content button");
     private final By viewCart = By.linkText("View Cart");
 
@@ -21,7 +18,10 @@ public class ProductsPage extends BasePage {
     }
 
     public void searchForProducts(String searchText) {
+        WebElement searchInput = driver.findElement(By.id("search_product"));
+
         searchInput.sendKeys(searchText);
+
         clickButton(searchButton);
     }
 
@@ -38,17 +38,21 @@ public class ProductsPage extends BasePage {
     }
 
     public boolean isProductsListFilled() {
+        List<WebElement> products = driver.findElements(By.cssSelector(".single-products"));
+
         return !products.isEmpty();
     }
 
     public ProductDetailsPage clickViewProduct(int productId) {
         clickButton(By.cssSelector("a[href='/product_details/" + productId + "']"));
+
         return new ProductDetailsPage(driver);
     }
 
     public void addProductToCart(int productId) {
         WebElement product = driver.findElement(By.xpath("(//div[contains(@class, 'productinfo')])[" + productId + "]//p"));
         Actions actions = new Actions(driver);
+
         actions.moveToElement(product).perform();
         clickButton(By.cssSelector("a[data-product-id='" + productId + "']"));
     }
@@ -60,12 +64,14 @@ public class ProductsPage extends BasePage {
 
     public CartPage clickViewCart() {
         clickModalButton(viewCart);
+
         return new CartPage(driver);
     }
 
     //Search Results Products
     public boolean verifySearchResult(WebElement product, String searchText) {
         String productName = getElementText(product.findElement(By.cssSelector(".productinfo > p")));
+
         return productName.contains(searchText);
     }
 
@@ -75,7 +81,9 @@ public class ProductsPage extends BasePage {
 
     public void addSearchResultToCart(WebElement product) {
         Actions actions = new Actions(driver);
+
         actions.moveToElement(product).perform();
+
         clickButton(product.findElement(By.cssSelector(".overlay-content > .add-to-cart")));
     }
 
@@ -89,6 +97,7 @@ public class ProductsPage extends BasePage {
 
     public int getProductId(WebElement product) {
         WebElement element = product.findElement(By.cssSelector(".productinfo > a"));
+
         return Integer.parseInt(element.getDomAttribute("data-product-id"));
     }
 }

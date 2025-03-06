@@ -54,7 +54,9 @@ public class TestCase15 extends BaseTest {
 
 //        8. Add products to cart
         homePage.addProductToCart(product1.getId());
+
         homePage.clickContinueShopping();
+
         homePage.addProductToCart(product2.getId());
 
 //        9. Click 'Cart' button
@@ -91,8 +93,10 @@ public class TestCase15 extends BaseTest {
         assertTrue(paymentPage.isSuccessMessageVisible());
         assertEquals("Your order has been placed successfully!", paymentPage.getSuccessMessageText());
 
+        homePage = orderPlacedPage.clickContinue();
+
 //        17. Click 'Delete Account' button
-        AccountDeletedPage accountDeletedPage = orderPlacedPage.clickDeleteAccount();
+        AccountDeletedPage accountDeletedPage = homePage.clickDeleteAccount();
 
 //        18. Verify 'ACCOUNT DELETED!' and click 'Continue' button
         assertTrue(accountDeletedPage.isHeaderVisible());

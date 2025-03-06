@@ -79,8 +79,10 @@ public class TestCase16 extends BaseTest {
         assertTrue(paymentPage.isSuccessMessageVisible());
         assertEquals("Your order has been placed successfully!", paymentPage.getSuccessMessageText());
 
+        homePage = orderPlacedPage.clickContinue();
+
 //        16. Click 'Delete Account' button
-        AccountDeletedPage accountDeletedPage = orderPlacedPage.clickDeleteAccount();
+        AccountDeletedPage accountDeletedPage = homePage.clickDeleteAccount();
 
 //        17. Verify 'ACCOUNT DELETED!' and click 'Continue' button
         assertTrue(accountDeletedPage.isHeaderVisible());

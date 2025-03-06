@@ -36,6 +36,10 @@ public class TestCase9 extends BaseTest {
         assertEquals("SEARCHED PRODUCTS", productsPage.getHeaderText());
 
 //        8. Verify all the products related to search are visible
+        verifyProductsRelatedToSearch(productsPage, searchText);
+    }
+
+    public void verifyProductsRelatedToSearch(ProductsPage productsPage, String searchText) {
         List<WebElement> searchResults = productsPage.getSearchResults();
 
         for (WebElement product : searchResults) {

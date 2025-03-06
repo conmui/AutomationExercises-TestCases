@@ -1,10 +1,10 @@
 package com.conmui.tests;
+
 import com.conmui.Product;
 import com.conmui.pages.CartPage;
 import com.conmui.pages.HomePage;
 import com.conmui.pages.ProductDetailsPage;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //        Test Case 13: Verify Product quantity in Cart
