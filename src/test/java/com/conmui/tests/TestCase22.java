@@ -1,5 +1,4 @@
 package com.conmui.tests;
-
 import com.conmui.Product;
 import com.conmui.pages.CartPage;
 import com.conmui.pages.HomePage;
@@ -9,31 +8,27 @@ import org.openqa.selenium.WebElement;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//        Test Case 22: Add to cart from Recommended items
-//        1. Launch browser
-//        2. Navigate to url 'http://automationexercise.com'
+/*
+    Test Case 22: Add to cart from Recommended items
+    Verifies that a product from the "Recommended Items" section can be added to the cart and then checks if the product appears in the cart page.
+*/
 public class TestCase22 extends BaseTest {
     @Test
     public void addToCartRecommendedItems() {
         HomePage homePage = new HomePage(driver);
         int productId = 1;
 
-//        3. Scroll to bottom of page
         homePage.scrollToBottom();
 
-//        4. Verify 'RECOMMENDED ITEMS' are visible
         assertTrue(homePage.isRecommendedItemsHeaderVisible());
-        assertEquals("RECOMMENDED ITEMS", homePage.getRecommendedItemsHeaderText());
+        assertEquals(HOME_RECOMMENDEDITEMS_HEADER, homePage.getRecommendedItemsHeaderText());
 
-//        5. Click on 'Add To Cart' on Recommended product
         homePage.addToCartRecommendedItem(productId);
 
         Product recommendedItem = homePage.saveRecommendedItem(productId, homePage);
 
-//        6. Click on 'View Cart' button
         CartPage cartPage = homePage.clickViewCart();
 
-//        7. Verify that product is displayed in cart page
         verifyRecommendedItemWithCartProduct(productId, recommendedItem, cartPage);
     }
 

@@ -1,5 +1,4 @@
 package com.conmui.tests;
-
 import java.util.List;
 import com.conmui.pages.HomePage;
 import com.conmui.pages.ProductsPage;
@@ -8,32 +7,27 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//        Test Case 9: Search Product
-//        1. Launch browser
-//        2. Navigate to url 'http://automationexercise.com'
+/*
+    Test Case 9: Search Product
+    Verifies the product search functionality by entering a product name and confirming that the relevant products are displayed.
+*/
 public class TestCase9 extends BaseTest {
     @Test
     public void searchProductsTest() {
         HomePage homePage = new HomePage(driver);
         String searchText = "Jeans";
 
-//        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
-//        4. Click on 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();
 
-//        5. Verify user is navigated to ALL PRODUCTS page successfully
-        verifyPageVisible(EXPECTED_PRODUCTS_URL, EXPECTED_PRODUCTS_TITLE);
+        verifyPageVisible(PRODUCTS_URL, PRODUCTS_TITLE);
 
-//        6. Enter product name in search input and click search button
         productsPage.searchForProducts(searchText);
 
-//        7. Verify 'SEARCHED PRODUCTS' is visible
         assertTrue(productsPage.isHeaderVisible());
-        assertEquals("SEARCHED PRODUCTS", productsPage.getHeaderText());
+        assertEquals(PRODUCTS_SEARCHED_HEADER, productsPage.getHeaderText());
 
-//        8. Verify all the products related to search are visible
         verifyProductsRelatedToSearch(productsPage, searchText);
     }
 

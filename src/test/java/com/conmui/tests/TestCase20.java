@@ -1,5 +1,4 @@
 package com.conmui.tests;
-
 import java.util.ArrayList;
 import java.util.List;
 import com.conmui.Product;
@@ -13,54 +12,45 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//        Test Case 20: Search Products and Verify Cart After Login
-//        1. Launch browser
-//        2. Navigate to url 'http://automationexercise.com'
+/*
+    Test Case 20: Search Products and Verify Cart After Login
+    Verifies the functionality of searching products, adding them to the cart, logging in, and ensuring that the products remain in the cart after the user logs in.
+*/
 public class TestCase20 extends BaseTest {
     @Test
     public void verifySearchProductsAndAddToCartAfterLogin() {
         HomePage homePage = new HomePage(driver);
-        String searchText = "Jeans";
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
+        String searchText = "Jeans";
 
-//        3. Click on 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();
 
-//        4. Verify user is navigated to ALL PRODUCTS page successfully
-        verifyPageVisible(EXPECTED_PRODUCTS_URL, EXPECTED_PRODUCTS_TITLE);
+        verifyPageVisible(PRODUCTS_URL, PRODUCTS_TITLE);
 
         assertTrue(productsPage.isHeaderVisible());
-        assertEquals("ALL PRODUCTS", productsPage.getHeaderText());
+        assertEquals(PRODUCTS_HEADER, productsPage.getHeaderText());
 
-//        5. Enter product name in search input and click search button
         productsPage.searchForProducts(searchText);
 
-//        6. Verify 'SEARCHED PRODUCTS' is visible
         assertTrue(productsPage.isHeaderVisible());
-        assertEquals("SEARCHED PRODUCTS", productsPage.getHeaderText());
+        assertEquals(PRODUCTS_SEARCHED_HEADER, productsPage.getHeaderText());
 
-//        7. Verify all the products related to search are visible
         List<WebElement> searchResults = productsPage.getSearchResults();
         verifySearchResults(searchResults, productsPage, searchText);
 
-//        8. Add those products to cart
         List<Product> searchResultsList = addSearchResultsToCartAndList(searchResults, productsPage);
 
-//        9. Click 'Cart' button and verify that products are visible in cart
         CartPage cartPage = productsPage.clickViewCart();
 
         List<WebElement> cartProducts = cartPage.getCartProducts();
         verifyCartWithSearchResults(cartProducts, searchResultsList, cartPage);
 
-//        10. Click 'Signup / Login' button and submit login details
         SignupLoginPage signupLoginPage = cartPage.navigateToSignupLoginPage();
         signupLoginPage.fillLogin(user.getEmail(), user.getPassword());
         homePage = signupLoginPage.clickLogin();
 
-//        11. Again, go to Cart page
         cartPage = homePage.navigateToCartPage();
 
-//        12. Verify that those products are visible in cart after login as well
         verifyCartWithSearchResults(cartPage.getCartProducts(), searchResultsList, cartPage);
     }
 

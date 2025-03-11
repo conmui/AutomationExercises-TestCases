@@ -1,5 +1,4 @@
 package com.conmui.tests;
-
 import com.conmui.Product;
 import com.conmui.pages.HomePage;
 import com.conmui.pages.ProductDetailsPage;
@@ -7,9 +6,10 @@ import com.conmui.pages.ProductsPage;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//        Test Case 8: Verify All Products and product detail page
-//        1. Launch browser
-//        2. Navigate to url 'http://automationexercise.com'
+/*
+    Test Case 8: Verify All Products and Product Detail Page
+    Verifies that the 'All Products' page displays a list of products, and allows navigation to the product detail page with correct product information.
+*/
 public class TestCase8 extends BaseTest {
     @Test
     public void allProductsProductDetail() {
@@ -17,26 +17,19 @@ public class TestCase8 extends BaseTest {
         Product product1 = new Product(1, "Blue Top", 500, 1);
         String expectedProductDetailsURL = "https://automationexercise.com/product_details/" + product1.getId();
 
-//        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
-//        4. Click on 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();
 
-//        5. Verify user is navigated to ALL PRODUCTS page successfully
-        verifyPageVisible(EXPECTED_PRODUCTS_URL, EXPECTED_PRODUCTS_TITLE);
+        verifyPageVisible(PRODUCTS_URL, PRODUCTS_TITLE);
 
-//        6. The products list is visible with products
         assertTrue(productsPage.isProductsListVisible());
         assertTrue(productsPage.isProductsListFilled());
 
-//        7. Click on 'View Product' of first product
         ProductDetailsPage productDetailsPage = productsPage.clickViewProduct(product1.getId());
 
-//        8. User is landed to product detail page
-        verifyPageVisible(expectedProductDetailsURL, EXPECTED_PRODUCTDETAILS_TITLE);
+        verifyPageVisible(expectedProductDetailsURL, PRODUCTDETAILS_TITLE);
 
-//        9. Verify that product details is visible: product name, category, price, availability, condition, brand
         verifyProductDetailsVisible(productDetailsPage);
     }
 

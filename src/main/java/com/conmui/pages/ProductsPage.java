@@ -1,5 +1,4 @@
 package com.conmui.pages;
-
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 public class ProductsPage extends BasePage {
     private final By searchButton = By.id("submit_search");
     private final By header = By.cssSelector(".features_items > .title");
+    private final By brandsHeader = By.cssSelector(".brands_products > h2");
+    private final By brandsSection = By.cssSelector(".brands_products");
     private final By productsList = By.cssSelector(".features_items");
     private final By continueShopping = By.cssSelector(".modal-content button");
     private final By viewCart = By.linkText("View Cart");
@@ -31,6 +32,31 @@ public class ProductsPage extends BasePage {
 
     public String getHeaderText() {
         return getElementText(header);
+    }
+
+    //Sidebar: Brands
+    public boolean isBrandHeaderVisible() {
+        return isElementVisible(brandsHeader);
+    }
+
+    public String getBrandHeaderText() {
+        return getElementText(brandsHeader);
+    }
+
+    public boolean isBrandSectionVisible() {
+        return isElementVisible(brandsSection);
+    }
+
+    public boolean isBrandSectionFilled() {
+        List<WebElement> brandsPanels = driver.findElements(By.cssSelector(".brands-name li"));
+
+        return !brandsPanels.isEmpty();
+    }
+
+    public BrandProductsPage clickBrand(String brandName) {
+        clickButton(By.cssSelector("a[href='/brand_products/" + brandName + "']"));
+
+        return new BrandProductsPage(driver);
     }
 
     public boolean isProductsListVisible() {

@@ -1,5 +1,4 @@
 package com.conmui.pages;
-
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +18,7 @@ public class BasePage {
     private final By deleteAccountLink = By.linkText("Delete Account");
     private final By testCasesLink = By.linkText("Test Cases");
     private final By contactUsLink = By.linkText("Contact us");
+    private final By scrollUp = By.id("scrollUp");
     private final By footerHeader = By.cssSelector(".footer-widget h2");
     private final By successAlert = By.id("success-subscribe");
 
@@ -43,12 +43,16 @@ public class BasePage {
     }
 
     public void clickButton(By locator) {
-        WebElement button = driver.findElement(locator);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(locator));
 
         button.click();
     }
 
     public void clickButton(WebElement locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+
         locator.click();
     }
 
@@ -149,11 +153,22 @@ public class BasePage {
     }
 
     //Footer
-    public void scrollToFooter() {
-        WebElement footer = driver.findElement(By.tagName("footer"));
+    public void scrollToBottom() {
+        WebElement bottom = driver.findElement(By.tagName("footer"));
 
-        new Actions(driver).scrollToElement(footer).perform();
+        new Actions(driver).scrollToElement(bottom).perform();
     }
+
+    public void scrollToTop() {
+        WebElement bottom = driver.findElement(By.className("logo"));
+
+        new Actions(driver).scrollToElement(bottom).perform();
+    }
+
+    public void clickArrowToScrollToTop() {
+        clickButton(scrollUp);
+    }
+
 
     public boolean isFooterHeaderVisible() {
         return isElementVisible(footerHeader);

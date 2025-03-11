@@ -1,10 +1,8 @@
 package com.conmui.pages;
-
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class BrandProductsPage extends BasePage {
     private final By header = By.cssSelector(".features_items > h2");

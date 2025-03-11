@@ -1,5 +1,4 @@
 package com.conmui.pages;
-
 import java.util.List;
 import com.conmui.Product;
 import org.openqa.selenium.By;
@@ -13,9 +12,8 @@ public class HomePage extends BasePage {
     private final By viewCart = By.linkText("View Cart");
     private final By categorySection = By.id("accordian");
     private final By categoryHeader = By.cssSelector(".left-sidebar > h2");
-    private final By brandsHeader = By.cssSelector(".brands_products > h2");
-    private final By brandsSection = By.cssSelector(".brands_products");
     private final By recommendedItemsHeader = By.cssSelector(".recommended_items > h2");
+    private final By mainHeader = By.cssSelector(".carousel-inner h2");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -27,6 +25,14 @@ public class HomePage extends BasePage {
 
     public String getLoggedInText() {
         return getElementText(loggedInAs);
+    }
+
+    public boolean isMainHeaderVisible() {
+        return isElementVisible(mainHeader);
+    }
+
+    public String getMainHeaderText() {
+        return getElementText(mainHeader);
     }
 
     //'All Products' Section
@@ -82,38 +88,7 @@ public class HomePage extends BasePage {
         return new CategoryProductsPage(driver);
     }
 
-    //Sidebar: Brands
-    public boolean isBrandHeaderVisible() {
-        return isElementVisible(brandsHeader);
-    }
-
-    public String getBrandHeaderText() {
-        return getElementText(brandsHeader);
-    }
-
-    public boolean isBrandSectionVisible() {
-        return isElementVisible(brandsSection);
-    }
-
-    public boolean isBrandSectionFilled() {
-        List<WebElement> brandsPanels = driver.findElements(By.cssSelector(".brands-name li"));
-
-        return !brandsPanels.isEmpty();
-    }
-
-    public BrandProductsPage clickBrand(String brandName) {
-        clickButton(By.cssSelector("a[href='/brand_products/" + brandName + "']"));
-
-        return new BrandProductsPage(driver);
-    }
-
     //'RECOMMENDED ITEMS' Section
-    public void scrollToBottom() {
-        WebElement footer = driver.findElement(By.tagName("footer"));
-
-        new Actions(driver).scrollToElement(footer).perform();
-    }
-
     public boolean isRecommendedItemsHeaderVisible() {
         return isElementVisible(recommendedItemsHeader);
     }

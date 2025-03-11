@@ -1,24 +1,21 @@
 package com.conmui.tests;
-
 import com.conmui.pages.HomePage;
 import com.conmui.pages.TestCasesPage;
 import org.junit.jupiter.api.Test;
 
-//        Test Case 7: Verify Test Cases Page
-//        1. Launch browser
-//        2. Navigate to url 'http://automationexercise.com'
+/*
+    Test Case 7: Verify Test Cases Page
+    Verifies that the 'Test Cases' page and the user is navigated to it successfully.
+*/
 public class TestCase7 extends BaseTest {
     @Test
     public void verifyTestCasesPage() {
         HomePage homePage = new HomePage(driver);
 
-//        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
-//        4. Click on 'Test Cases' button
         TestCasesPage testCasesPage = homePage.navigateToTestCasesPage();
 
-//        5. Verify user is navigated to test cases page successfully
-        verifyPageVisible(EXPECTED_TESTCASES_URL, EXPECTED_TESTCASES_TITLE);
+        verifyPageVisible(TESTCASES_URL, TESTCASES_TITLE);
     }
 }

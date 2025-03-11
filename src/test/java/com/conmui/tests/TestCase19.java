@@ -1,5 +1,4 @@
 package com.conmui.tests;
-
 import com.conmui.pages.BrandProductsPage;
 import com.conmui.pages.HomePage;
 import com.conmui.pages.ProductsPage;
@@ -7,9 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//        Test Case 19: View & Cart Brand Products
-//        1. Launch browser
-//        2. Navigate to url 'http://automationexercise.com'
+/*
+    Test Case 19: View & Cart Brand Products
+    Verifies the left sidebar allows navigation to a selected brand's product page, and ensures that users can view products associated with different brands.
+*/
 public class TestCase19 extends BaseTest {
     @Test
     public void verifyBrandProductsListing() {
@@ -17,27 +17,21 @@ public class TestCase19 extends BaseTest {
         String brandName1 = "H&M";
         String brandName2 = "Polo";
 
-//        3. Click on 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();
 
-//        4. Verify that Brands are visible on left sidebar
-        assertTrue(homePage.isBrandHeaderVisible());
-        assertEquals("BRANDS", homePage.getBrandHeaderText());
-        assertTrue(homePage.isBrandSectionVisible());
-        assertTrue(homePage.isBrandSectionFilled());
+        assertTrue(productsPage.isBrandHeaderVisible());
+        assertEquals(PRODUCTS_BRANDS_HEADER, productsPage.getBrandHeaderText());
+        assertTrue(productsPage.isBrandSectionVisible());
+        assertTrue(productsPage.isBrandSectionFilled());
 
-//        5. Click on any brand name
-        BrandProductsPage brandProductsPage = homePage.clickBrand(brandName1);
+        BrandProductsPage brandProductsPage = productsPage.clickBrand(brandName1);
 
-//        6. Verify that user is navigated to brand page and brand products are displayed
         verifyBrandProductsPageVisible(brandName1);
 
         verifyBrandProductsSection(brandProductsPage, brandName1);
 
-//        7. On left sidebar, click on any other brand link
         brandProductsPage.clickBrand(brandName2);
 
-//        8. Verify that user is navigated to that brand page and can see products
         verifyBrandProductsPageVisible(brandName2);
 
         verifyBrandProductsSection(brandProductsPage, brandName2);
