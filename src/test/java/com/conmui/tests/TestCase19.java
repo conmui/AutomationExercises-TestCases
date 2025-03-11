@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase19 extends BaseTest {
     @Test
-    public void test() {
+    public void verifyBrandProductsListing() {
         HomePage homePage = new HomePage(driver);
         String brandName1 = "H&M";
         String brandName2 = "Polo";
@@ -30,21 +30,30 @@ public class TestCase19 extends BaseTest {
         BrandProductsPage brandProductsPage = homePage.clickBrand(brandName1);
 
 //        6. Verify that user is navigated to brand page and brand products are displayed
-        verifyPageAndProducts(brandProductsPage, brandName1);
+        verifyBrandProductsPageVisible(brandName1);
+
+        verifyBrandProductsSection(brandProductsPage, brandName1);
 
 //        7. On left sidebar, click on any other brand link
         brandProductsPage.clickBrand(brandName2);
 
 //        8. Verify that user is navigated to that brand page and can see products
-        verifyPageAndProducts(brandProductsPage, brandName2);
+        verifyBrandProductsPageVisible(brandName2);
+
+        verifyBrandProductsSection(brandProductsPage, brandName2);
     }
 
-    public void verifyPageAndProducts(BrandProductsPage brandProductsPage, String brandName) {
-        assertEquals("https://automationexercise.com/brand_products/" + brandName, brandProductsPage.getUrl());
-        assertEquals("Automation Exercise - " + brandName + " Products", brandProductsPage.getPageTitle());
+    public void verifyBrandProductsPageVisible(String brandName) {
+        String expectedURL = "https://automationexercise.com/brand_products/" + brandName;
+        String expectedTitle = "Automation Exercise - " + brandName + " Products";
 
+        verifyPageVisible(expectedURL, expectedTitle);
+    }
+
+    public void verifyBrandProductsSection(BrandProductsPage brandProductsPage, String brandName) {
         assertTrue(brandProductsPage.isHeaderVisible());
         assertEquals("BRAND - " + brandName.toUpperCase() + " PRODUCTS", brandProductsPage.getHeaderText());
+
         assertTrue(brandProductsPage.isProductsSectionVisible());
         assertTrue(brandProductsPage.isProductsSectionFilled());
     }

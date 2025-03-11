@@ -26,14 +26,6 @@ public class BasePage {
         this.driver = driver;
     }
 
-    public String getUrl() {
-        return driver.getCurrentUrl();
-    }
-
-    public String getPageTitle() {
-        return driver.getTitle();
-    }
-
     public boolean isElementVisible(By locator) {
         WebElement element = driver.findElement(locator);
 

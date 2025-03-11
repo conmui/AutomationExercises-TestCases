@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase22 extends BaseTest {
     @Test
-    public void test() {
+    public void addToCartRecommendedItems() {
         HomePage homePage = new HomePage(driver);
         int productId = 1;
 

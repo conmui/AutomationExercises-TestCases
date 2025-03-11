@@ -13,20 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase9 extends BaseTest {
     @Test
-    public void searchProductTest() {
+    public void searchProductsTest() {
         HomePage homePage = new HomePage(driver);
         String searchText = "Jeans";
 
 //        3. Verify that home page is visible successfully
-        assertEquals("https://automationexercise.com/", homePage.getUrl());
-        assertEquals("Automation Exercise", homePage.getPageTitle());
+        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
 
 //        4. Click on 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();
 
 //        5. Verify user is navigated to ALL PRODUCTS page successfully
-        assertEquals("https://automationexercise.com/products", productsPage.getUrl());
-        assertEquals("Automation Exercise - All Products", productsPage.getPageTitle());
+        verifyPageVisible(EXPECTED_PRODUCTS_URL, EXPECTED_PRODUCTS_TITLE);
 
 //        6. Enter product name in search input and click search button
         productsPage.searchForProducts(searchText);

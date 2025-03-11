@@ -11,13 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'https://automationexercise.com/'
 public class TestCase1 extends BaseTest {
     @Test
-    public void registerUserTest() {
+    public void registerUser() {
         HomePage homePage = new HomePage(driver);
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
 
 //        3. Verify that home page is visible successfully
-        assertEquals("https://automationexercise.com/", homePage.getUrl());
-        assertEquals("Automation Exercise", homePage.getPageTitle());
+        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
 
 //        4. Click on 'Signup / Login' button
         SignupLoginPage signupLoginPage = homePage.navigateToSignupLoginPage();

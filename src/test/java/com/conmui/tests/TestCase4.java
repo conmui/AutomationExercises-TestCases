@@ -12,13 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase4 extends BaseTest {
     @Test
-    public void logoutTest() {
+    public void userLogout() {
         HomePage homePage = new HomePage(driver);
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
 
 //        3. Verify that home page is visible successfully
-        assertEquals("https://automationexercise.com/", homePage.getUrl());
-        assertEquals("Automation Exercise", homePage.getPageTitle());
+        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
 
 //        4. Click on 'Signup / Login' button
         SignupLoginPage signupLoginPage = homePage.navigateToSignupLoginPage();
@@ -41,7 +40,6 @@ public class TestCase4 extends BaseTest {
         signupLoginPage = homePage.clickLogout();
 
 //        10. Verify that user is navigated to login page
-        assertEquals("https://automationexercise.com/login", signupLoginPage.getUrl());
-        assertEquals("Automation Exercise - Signup / Login", signupLoginPage.getPageTitle());
+        verifyPageVisible(EXPECTED_SIGNUPLOGIN_URL, EXPECTED_SIGNUPLOGIN_TITLE);
     }
 }

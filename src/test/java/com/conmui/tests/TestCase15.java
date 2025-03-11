@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase15 extends BaseTest {
     @Test
-    public void placeOrderRegBeforeCheckout() {
+    public void placeOrderRegisterBeforeCheckout() {
         HomePage homePage = new HomePage(driver);
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
         Product product1 = new Product(1, "Blue Top", 500, 1);
@@ -26,8 +26,7 @@ public class TestCase15 extends BaseTest {
         String expiryYear = "2030";
 
 //        3. Verify that home page is visible successfully
-        assertEquals("https://automationexercise.com/", homePage.getUrl());
-        assertEquals("Automation Exercise", homePage.getPageTitle());
+        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
 
 //        4. Click 'Signup / Login' button
         SignupLoginPage signupLoginPage = homePage.navigateToSignupLoginPage();
@@ -63,8 +62,7 @@ public class TestCase15 extends BaseTest {
         CartPage cartPage = homePage.clickViewCart();
 
 //        10. Verify that cart page is displayed
-        assertEquals("https://automationexercise.com/view_cart", cartPage.getUrl());
-        assertEquals("Automation Exercise - Checkout", cartPage.getPageTitle());
+        verifyPageVisible(EXPECTED_CART_URL, EXPECTED_CART_TITLE);
 
 //        11. Click Proceed To Checkout
         CheckoutPage checkoutPage = cartPage.clickProceedToCheckout();

@@ -26,8 +26,7 @@ public class TestCase16 extends BaseTest {
         String expiryYear = "2030";
 
 //        3. Verify that home page is visible successfully
-        assertEquals("https://automationexercise.com/", homePage.getUrl());
-        assertEquals("Automation Exercise", homePage.getPageTitle());
+        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
 
 //        4. Click 'Signup / Login' button
         SignupLoginPage signupLoginPage = homePage.navigateToSignupLoginPage();
@@ -49,8 +48,7 @@ public class TestCase16 extends BaseTest {
         CartPage cartPage = homePage.clickViewCart();
 
 //        9. Verify that cart page is displayed
-        assertEquals("https://automationexercise.com/view_cart", cartPage.getUrl());
-        assertEquals("Automation Exercise - Checkout", cartPage.getPageTitle());
+        verifyPageVisible(EXPECTED_CART_URL, EXPECTED_CART_TITLE);
 
 //        10. Click Proceed To Checkout
         CheckoutPage checkoutPage = cartPage.clickProceedToCheckout();

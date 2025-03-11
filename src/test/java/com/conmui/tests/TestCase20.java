@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase20 extends BaseTest {
     @Test
-    public void test() {
+    public void verifySearchProductsAndAddToCartAfterLogin() {
         HomePage homePage = new HomePage(driver);
         String searchText = "Jeans";
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
@@ -27,8 +27,8 @@ public class TestCase20 extends BaseTest {
         ProductsPage productsPage = homePage.navigateToProductsPage();
 
 //        4. Verify user is navigated to ALL PRODUCTS page successfully
-        assertEquals("https://automationexercise.com/products", productsPage.getUrl());
-        assertEquals("Automation Exercise - All Products", productsPage.getPageTitle());
+        verifyPageVisible(EXPECTED_PRODUCTS_URL, EXPECTED_PRODUCTS_TITLE);
+
         assertTrue(productsPage.isHeaderVisible());
         assertEquals("ALL PRODUCTS", productsPage.getHeaderText());
 

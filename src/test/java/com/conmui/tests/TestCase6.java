@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase6 extends BaseTest {
     @Test
-    public void contactUsTest() {
+    public void verifyContactUsPage() {
         HomePage homePage = new HomePage(driver);
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
         String subject = "Lorem Ipsum";
@@ -20,8 +20,7 @@ public class TestCase6 extends BaseTest {
 //        String uploadFilePath = "";
 
 //        3. Verify that home page is visible successfully
-        assertEquals("https://automationexercise.com/", homePage.getUrl());
-        assertEquals("Automation Exercise", homePage.getPageTitle());
+        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
 
 //        4. Click on 'Contact Us' button
         ContactUsPage contactUsPage = homePage.navigateToContactUsPage();
@@ -49,7 +48,6 @@ public class TestCase6 extends BaseTest {
 //        11. Click 'Home' button and verify that landed to home page successfully
         homePage = contactUsPage.navigateToHomePage();
 
-        assertEquals("https://automationexercise.com/", homePage.getUrl());
-        assertEquals("Automation Exercise", homePage.getPageTitle());
+        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
     }
 }

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase18 extends BaseTest {
     @Test
-    public void test() {
+    public void verifyCategoryProductsListing() {
         HomePage homePage = new HomePage(driver);
 
         String category1Name = "Women";
@@ -33,14 +33,19 @@ public class TestCase18 extends BaseTest {
         CategoryProductsPage categoryProductsPage = homePage.clickCategorySubcategory(category1Name, subcategory1Id);
 
 //        6. Verify that category page is displayed and confirm text 'WOMEN - TOPS PRODUCTS'
-        assertEquals("https://automationexercise.com/category_products/" + subcategory1Id, categoryProductsPage.getUrl());
-        assertEquals("Automation Exercise - " + subcategory1Name + " Products", categoryProductsPage.getPageTitle());
+        verifyCategoryPage(subcategory1Id, subcategory1Name);
 
 //        7. On left sidebar, click on any sub-category link of 'Men' category
         categoryProductsPage.clickCategorySubcategory(category2Name, subcategory2Id);
 
 //        8. Verify that user is navigated to that category page
-        assertEquals("https://automationexercise.com/category_products/" + subcategory2Id, categoryProductsPage.getUrl());
-        assertEquals("Automation Exercise - " + subcategory2Name + " Products", categoryProductsPage.getPageTitle());
+        verifyCategoryPage(subcategory2Id, subcategory2Name);
+    }
+
+    public void verifyCategoryPage(int subcategoryId, String subcategoryName) {
+        String expectedURL = "https://automationexercise.com/category_products/" + subcategoryId;
+        String expectedTitle = "Automation Exercise - " + subcategoryName + " Products";
+
+        verifyPageVisible(expectedURL, expectedTitle);
     }
 }
