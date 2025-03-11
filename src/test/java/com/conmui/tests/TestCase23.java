@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //        2. Navigate to url 'http://automationexercise.com'
 public class TestCase23 extends BaseTest {
     @Test
-    public void test() {
+    public void verifyAddressDetailsOnCheckoutPage() {
         HomePage homePage = new HomePage(driver);
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
         Product product1 = new Product(1, "Blue Top", 500, 1);
@@ -66,17 +66,5 @@ public class TestCase23 extends BaseTest {
         assertEquals("ACCOUNT DELETED!", accountDeletedPage.getHeaderText());
 
         accountDeletedPage.clickContinue();
-    }
-
-    public void verifyAddressDetails(User user, CheckoutPage checkoutPage, String addressType) {
-        String expectedTitleFullName = user.getTitle() + ". " + user.getFirstName() + " " + user.getLastName();
-        String expectedCityStateZipCode = user.getCity() + " " + user.getState() + " " + user.getZipCode();
-
-        assertEquals(expectedTitleFullName, checkoutPage.getFullName(addressType));
-        assertEquals(user.getCompany(), checkoutPage.getCompany(addressType));
-        assertEquals(user.getAddress(), checkoutPage.getAddress(addressType));
-        assertEquals(expectedCityStateZipCode, checkoutPage.getCityStateZipCode(addressType));
-        assertEquals(user.getCountry(), checkoutPage.getCountry(addressType));
-        assertEquals(user.getMobileNumber(), checkoutPage.getMobileNumber(addressType));
     }
 }

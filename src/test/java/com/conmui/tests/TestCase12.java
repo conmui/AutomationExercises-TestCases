@@ -42,11 +42,4 @@ public class TestCase12 extends BaseTest {
         verifyProductDetails(cartPage, product1);
         verifyProductDetails(cartPage, product2);
     }
-
-    public void verifyProductDetails(CartPage cartPage, Product product) {
-        assertEquals(product.getName(), cartPage.getProductName(product.getId()));
-        assertEquals(product.getPrice(), cartPage.getProductPrice(product.getId()));
-        assertEquals(product.getQuantity(), cartPage.getProductQuantity(product.getId()));
-        assertEquals(product.getTotal(), cartPage.getProductTotal(product.getId()));
-    }
 }

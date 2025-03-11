@@ -99,23 +99,4 @@ public class TestCase14 extends BaseTest {
         assertTrue(accountDeletedPage.isHeaderVisible());
         assertEquals("ACCOUNT DELETED!", accountDeletedPage.getHeaderText());
     }
-
-    public void verifyAddressDetails(User user, CheckoutPage checkoutPage, String addressType) {
-        String expectedTitleFullName = user.getTitle() + ". " + user.getFirstName() + " " + user.getLastName();
-        String expectedCityStateZipCode = user.getCity() + " " + user.getState() + " " + user.getZipCode();
-
-        assertEquals(expectedTitleFullName, checkoutPage.getFullName(addressType));
-        assertEquals(user.getCompany(), checkoutPage.getCompany(addressType));
-        assertEquals(user.getAddress(), checkoutPage.getAddress(addressType));
-        assertEquals(expectedCityStateZipCode, checkoutPage.getCityStateZipCode(addressType));
-        assertEquals(user.getCountry(), checkoutPage.getCountry(addressType));
-        assertEquals(user.getMobileNumber(), checkoutPage.getMobileNumber(addressType));
-    }
-
-    public void verifyProductDetails(Product product, CheckoutPage checkoutPage) {
-        assertEquals(product.getName(), checkoutPage.getProductName(product.getId()));
-        assertEquals(product.getPrice(), checkoutPage.getProductPrice(product.getId()));
-        assertEquals(product.getQuantity(), checkoutPage.getProductQuantity(product.getId()));
-        assertEquals(product.getTotal(), checkoutPage.getProductTotal(product.getId()));
-    }
 }

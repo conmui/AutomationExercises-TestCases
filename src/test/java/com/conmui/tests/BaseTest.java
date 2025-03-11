@@ -1,6 +1,11 @@
 package com.conmui.tests;
 
 import java.time.Duration;
+
+import com.conmui.Product;
+import com.conmui.User;
+import com.conmui.pages.CartPage;
+import com.conmui.pages.CheckoutPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.AfterEach;
@@ -38,5 +43,31 @@ public class BaseTest {
     public void verifyPageVisible(String expectedURL, String expectedTitle) {
         assertEquals(expectedURL, driver.getCurrentUrl());
         assertEquals(expectedTitle, driver.getTitle());
+    }
+
+    public void verifyProductDetails(CartPage cartPage, Product product) {
+        assertEquals(product.getName(), cartPage.getProductName(product.getId()));
+        assertEquals(product.getPrice(), cartPage.getProductPrice(product.getId()));
+        assertEquals(product.getQuantity(), cartPage.getProductQuantity(product.getId()));
+        assertEquals(product.getTotal(), cartPage.getProductTotal(product.getId()));
+    }
+
+    public void verifyAddressDetails(User user, CheckoutPage checkoutPage, String addressType) {
+        String expectedTitleFullName = user.getTitle() + ". " + user.getFirstName() + " " + user.getLastName();
+        String expectedCityStateZipCode = user.getCity() + " " + user.getState() + " " + user.getZipCode();
+
+        assertEquals(expectedTitleFullName, checkoutPage.getFullName(addressType));
+        assertEquals(user.getCompany(), checkoutPage.getCompany(addressType));
+        assertEquals(user.getAddress(), checkoutPage.getAddress(addressType));
+        assertEquals(expectedCityStateZipCode, checkoutPage.getCityStateZipCode(addressType));
+        assertEquals(user.getCountry(), checkoutPage.getCountry(addressType));
+        assertEquals(user.getMobileNumber(), checkoutPage.getMobileNumber(addressType));
+    }
+
+    public void verifyProductDetails(Product product, CheckoutPage checkoutPage) {
+        assertEquals(product.getName(), checkoutPage.getProductName(product.getId()));
+        assertEquals(product.getPrice(), checkoutPage.getProductPrice(product.getId()));
+        assertEquals(product.getQuantity(), checkoutPage.getProductQuantity(product.getId()));
+        assertEquals(product.getTotal(), checkoutPage.getProductTotal(product.getId()));
     }
 }
