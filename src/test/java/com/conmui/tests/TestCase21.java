@@ -17,9 +17,7 @@ public class TestCase21 extends BaseTest {
     public void addProductReview() {
         HomePage homePage = new HomePage(driver);
         Product product1 = new Product(1, "Blue Top", 500, 1);
-        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
-        String fullName = user.getFirstName() + " " + user.getLastName();
-        String email = user.getEmail();
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
         String reviewMessage = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 //        3. Click on 'Products' button
@@ -39,7 +37,7 @@ public class TestCase21 extends BaseTest {
         assertEquals("WRITE YOUR REVIEW", productDetailsPage.getReviewHeaderText());
 
 //        7. Enter name, email and review
-        productDetailsPage.fillReview(fullName, email, reviewMessage);
+        productDetailsPage.fillReview(user.getFullName(), user.getEmail(), reviewMessage);
 
 //        8. Click 'Submit' button
         productDetailsPage.submitReview();

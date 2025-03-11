@@ -21,7 +21,7 @@ public class TestCase20 extends BaseTest {
     public void verifySearchProductsAndAddToCartAfterLogin() {
         HomePage homePage = new HomePage(driver);
         String searchText = "Jeans";
-        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
 
 //        3. Click on 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();

@@ -14,7 +14,7 @@ public class TestCase4 extends BaseTest {
     @Test
     public void userLogout() {
         HomePage homePage = new HomePage(driver);
-        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
 
 //        3. Verify that home page is visible successfully
         verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);

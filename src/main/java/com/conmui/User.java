@@ -18,8 +18,13 @@ public class User {
     private String city;
     private String zipCode;
     private String mobileNumber;
+    private String cardNumber;
+    private String cvc;
+    private String expiryMonth;
+    private String expiryYear;
 
-    public User(String username, String email, String title, String password, String day, String month, String year, String firstName, String lastName, String company, String address, String address2, String country, String state, String city, String zipCode, String mobileNumber) {
+
+    public User(String username, String email, String title, String password, String day, String month, String year, String firstName, String lastName, String company, String address, String address2, String country, String state, String city, String zipCode, String mobileNumber,  String cardNumber, String cvc, String expiryMonth, String expiryYear) {
         this.username = username;
         this.email = email;
         this.title = title;
@@ -37,6 +42,10 @@ public class User {
         this.city = city;
         this.zipCode = zipCode;
         this.mobileNumber = mobileNumber;
+        this.cardNumber = cardNumber;
+        this.cvc = cvc;
+        this.expiryMonth = expiryMonth;
+        this.expiryYear = expiryYear;
     }
 
     public String getUsername() {
@@ -75,6 +84,10 @@ public class User {
         return lastName;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     public String getCompany() {
         return company;
     }
@@ -105,5 +118,21 @@ public class User {
 
     public String getMobileNumber() {
         return mobileNumber;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public String getCvc() {
+        return cvc;
+    }
+
+    public String getExpiryMonth() {
+        return expiryMonth;
+    }
+
+    public String getExpiryYear() {
+        return expiryYear;
     }
 }

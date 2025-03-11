@@ -14,16 +14,11 @@ public class TestCase15 extends BaseTest {
     @Test
     public void placeOrderRegisterBeforeCheckout() {
         HomePage homePage = new HomePage(driver);
-        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
         Product product1 = new Product(1, "Blue Top", 500, 1);
         Product product2 = new Product(2, "Men Tshirt", 400, 1);
         int expectedCartTotal = product1.getTotal() + product2.getTotal();
         String comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-        String nameOnCard = user.getFirstName() + " " + user.getLastName();
-        String cardNumber = "1111222277778888";
-        String cvc = "178";
-        String expiryMonth = "10";
-        String expiryYear = "2030";
 
 //        3. Verify that home page is visible successfully
         verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
@@ -82,14 +77,14 @@ public class TestCase15 extends BaseTest {
         PaymentPage paymentPage = checkoutPage.clickPlaceOrder();
 
 //        14. Enter payment details: Name on Card, Card Number, CVC, Expiration date
-        paymentPage.fillPayment(nameOnCard, cardNumber, cvc, expiryMonth, expiryYear);
+        paymentPage.fillPayment(user.getFullName(), user.getCardNumber(), user.getCvc(), user.getExpiryMonth(), user.getExpiryYear());
 
 //        15. Click 'Pay and Confirm Order' button
         OrderPlacedPage orderPlacedPage = paymentPage.clickPayConfirmOrder();
 
 //        16. Verify success message 'Your order has been placed successfully!'
-//        assertTrue(paymentPage.isSuccessMessageVisible());
-//        assertEquals("Your order has been placed successfully!", paymentPage.getSuccessMessageText());
+        assertTrue(paymentPage.isSuccessMessageVisible());
+        assertEquals("Your order has been placed successfully!", paymentPage.getSuccessMessageText());
 
         homePage = orderPlacedPage.clickContinue();
 

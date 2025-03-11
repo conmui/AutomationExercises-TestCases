@@ -14,7 +14,7 @@ public class TestCase6 extends BaseTest {
     @Test
     public void verifyContactUsPage() {
         HomePage homePage = new HomePage(driver);
-        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731");
+        User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
         String subject = "Lorem Ipsum";
         String message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 //        String uploadFilePath = "";
@@ -30,7 +30,7 @@ public class TestCase6 extends BaseTest {
         assertEquals("GET IN TOUCH", contactUsPage.getHeaderText());
 
 //        6. Enter name, email, subject and message
-        contactUsPage.fillContactMessage(user.getFirstName() + " " + user.getLastName(), user.getEmail(), subject, message);
+        contactUsPage.fillContactMessage(user.getFullName(), user.getEmail(), subject, message);
 
 //        7. Upload file
 //        contactUsPage.uploadFile(uploadFilePath);
